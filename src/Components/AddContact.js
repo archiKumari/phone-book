@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const AddContact = ({ addContactHandler }) => {
   
@@ -6,19 +6,22 @@ const AddContact = ({ addContactHandler }) => {
     name: "",
     contactNumber: "",
     email: "",
+    id: 0,
   });
 
   // Function to handle form input change
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    console.log("Name: ", name, "Value: ", value);
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const saveDataHandler = () => {
-    addContactHandler(formData);
+    const newId = Math.floor(Math.random() * 100) + 1;
+    addContactHandler({...formData,id: newId});
     setFormData({name:'',contactNumber:'',email:''});
   }
+
+  useEffect(() => {}, [])
 
   return (
     <div className="ui main">
