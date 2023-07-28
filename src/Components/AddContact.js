@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddContact = ({ addContactHandler }) => {
   
@@ -9,16 +10,20 @@ const AddContact = ({ addContactHandler }) => {
     id: 0,
   });
 
+  const navigate = useNavigate();
+
   // Function to handle form input change
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const saveDataHandler = () => {
+  const saveDataHandler = (e) => {
+    e.preventDefault();
     const newId = Math.floor(Math.random() * 100) + 1;
     addContactHandler({...formData,id: newId});
     setFormData({name:'',contactNumber:'',email:''});
+    navigate('/');
   }
 
   useEffect(() => {}, [])
@@ -26,7 +31,7 @@ const AddContact = ({ addContactHandler }) => {
   return (
     <div className="ui main">
       <h2>Add Contact</h2>
-      <form className="ui form">
+      <form className="ui form" onSubmit={saveDataHandler}>
         <div className="field">
           <label>Name</label>
           <input
@@ -57,7 +62,7 @@ const AddContact = ({ addContactHandler }) => {
             onChange={changeHandler}
           />
         </div>
-        <button className="ui button blue" onClick={saveDataHandler}>
+        <button className="ui button blue">
           Save
         </button>
       </form>

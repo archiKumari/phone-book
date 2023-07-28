@@ -1,11 +1,16 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+
 import Header from "./Components/Header";
 import AddContact from "./Components/AddContact";
 import ContactList from "./Components/ContactList";
 
 function App() {
-
   const [contacts, setContacts] = useState([]);
   const localStorageKey = "contacts";
 
@@ -23,7 +28,7 @@ function App() {
     });
     setContacts(newContacts);
     localStorage.setItem(localStorageKey, JSON.stringify(newContacts));
-  }
+  };
 
   useEffect(() => {
     const savedContacts = localStorage.getItem(localStorageKey);
@@ -33,9 +38,15 @@ function App() {
 
   return (
     <div className="ui container">
-      <Header />
-      <AddContact addContactHandler={addContactHandler}/>
-      <ContactList contacts={contacts} getContactId={deleteContactHandler}/>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ContactList contacts={contacts} getContactId={deleteContactHandler}/>} />
+          <Route path="/add" element={<AddContact addContactHandler={addContactHandler}/>} />
+          {/* <AddContact addContactHandler={addContactHandler}/> */}
+          {/* <ContactList contacts={contacts} getContactId={deleteContactHandler}/> */}
+        </Routes>
+      </Router>
     </div>
   );
 }

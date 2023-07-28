@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import ContactCard from "./ContactCard";
 
 const ContactList = ({contacts,getContactId}) => {
+
+    const navigate = useNavigate();
+
+
     const deleteContact = (id) => {
         getContactId(id);
     }
@@ -11,8 +17,14 @@ const ContactList = ({contacts,getContactId}) => {
         )
     })
     return (
+        <div>
+
         <div className="ui celled list">
             {renderContactList}
+        </div>
+        <button className="ui button blue" onClick={() => {navigate('/add')}}>
+          Add New Contact
+        </button>
         </div>
     )
 }
