@@ -1,14 +1,11 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./Components/Header";
 import AddContact from "./Components/AddContact";
 import ContactList from "./Components/ContactList";
+import ContactDetails from "./Components/ContactDetails";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -41,10 +38,23 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<ContactList contacts={contacts} getContactId={deleteContactHandler}/>} />
-          <Route path="/add" element={<AddContact addContactHandler={addContactHandler}/>} />
-          {/* <AddContact addContactHandler={addContactHandler}/> */}
-          {/* <ContactList contacts={contacts} getContactId={deleteContactHandler}/> */}
+          <Route
+            path="/"
+            element={
+              <ContactList
+                contacts={contacts}
+                getContactId={deleteContactHandler}
+              />
+            }
+          />
+          <Route
+            path="/add"
+            element={<AddContact addContactHandler={addContactHandler} />}
+          />
+          <Route
+            path="/contact/:id"
+            element={<ContactDetails contacts={contacts}/>}
+          />
         </Routes>
       </Router>
     </div>
