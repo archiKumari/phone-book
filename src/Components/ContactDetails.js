@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ContactDetails = ({ contacts }) => {
   console.log(contacts);
@@ -11,8 +11,8 @@ const ContactDetails = ({ contacts }) => {
   }
   return (
     <div className="main">
-      <div className="ui card centered">
-        <div style={circularDivStyle}>{name[0]}</div>
+      <div style={{borderRadius:'20px'}} className="ui card centered">
+        <div style={{width:'70px',height:'70px', backgroundColor:'grey'}}>{name[0]}</div>
         <div className="content">
           <div className="header">{name}</div>
           <div className="desciption">{email}</div>
@@ -20,17 +20,13 @@ const ContactDetails = ({ contacts }) => {
         </div>
       </div>
       <div className="center-div">
+        <Link to="/">
         <button className="ui button blue centered">Back to list</button>
+        </Link>
       </div>
     </div>
   );
 };
 
-const circularDivStyle = {
-  width: "50px",
-  height: "50px",
-  backgroundColor: "#f0f0f0",
-  borderRadius: "25px",
-};
 
 export default ContactDetails;
