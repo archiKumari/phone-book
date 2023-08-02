@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./Components/Header";
+import Header from "./Components/Header"
 import AddContact from "./Components/AddContact";
 import ContactList from "./Components/ContactList";
 import ContactDetails from "./Components/ContactDetails";
@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="ui container">
       <Router>
-        <Header />
+      <Header/>
         <Routes>
           <Route
             path="/"
