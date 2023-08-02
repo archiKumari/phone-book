@@ -1,6 +1,6 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-
+import {useParams} from "react-router-dom";
+import { Segment } from "semantic-ui-react";
 const ContactDetails = ({ contacts }) => {
   console.log(contacts);
   const { id } = useParams();
@@ -9,24 +9,56 @@ const ContactDetails = ({ contacts }) => {
   if (!contact) {
     return <div>Item not found!</div>;
   }
+
   return (
-    <div className="main">
-      <div style={{borderRadius:'20px'}} className="ui card centered">
-        <div style={{width:'70px',height:'70px', backgroundColor:'grey'}}>{name[0]}</div>
-        <div className="content">
-          <div className="header">{name}</div>
-          <div className="desciption">{email}</div>
-          <div className="desciption">{contactNumber}</div>
+    <div style={{marginTop:"20px"}}>
+    <Segment.Group>
+      <Segment><div style={{fontSize:"35px",fontWeight:"bold"}}>Contact Details</div></Segment>
+      <Segment>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            width: "80%",
+            color: "black",
+            fontSize: "35px",
+          }}
+        >
+          <div
+            style={{
+              height: "100px",
+              width: "100px",
+              borderRadius: "5%",
+              backgroundColor: "teal",
+              color: "white",
+              fontSize: "40px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: "25px",
+            }}
+          >
+            {name[0].toUpperCase()}
+          </div>
+          {name}
         </div>
-      </div>
-      <div className="center-div">
-        <Link to="/">
-        <button className="ui button blue centered">Back to list</button>
-        </Link>
-      </div>
-    </div>
+      </Segment>
+      <Segment.Group>
+        <Segment.Group horizontal>
+          <Segment>Email ID</Segment>
+          <Segment>{email}</Segment>
+          <Segment></Segment>
+        </Segment.Group>
+        <Segment.Group horizontal>
+          <Segment>Contact Number</Segment>
+          <Segment>{contactNumber}</Segment>
+          <Segment></Segment>
+        </Segment.Group>
+      </Segment.Group>
+    </Segment.Group>
+  </div>
   );
 };
-
 
 export default ContactDetails;
