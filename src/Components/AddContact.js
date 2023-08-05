@@ -1,13 +1,17 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Input, Label } from "semantic-ui-react";
 
 const AddContact = ({ addContactHandler }) => {
-  
   const [formData, setFormData] = useState({
     name: "",
     contactNumber: "",
     email: "",
     id: 0,
+  });
+  const [inputError, setInputError] = useState({
+    name: false,
+    contact: false,
   });
 
   const navigate = useNavigate();
@@ -15,58 +19,78 @@ const AddContact = ({ addContactHandler }) => {
   // Function to handle form input change
   const changeHandler = (e) => {
     const { name, value } = e.target;
+    console.log("name and value: ", name, value);
+    console.log("FormData before change:",formData);
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    console.log("FormData after change:",formData);
+    setInputError({ ...inputError, [name]: false });
   };
 
   const saveDataHandler = (e) => {
-    e.preventDefault();
-    const newId = Math.floor(Math.random() * 100) + 1;
-    addContactHandler({...formData,id: newId});
-    setFormData({name:'',contactNumber:'',email:''});
-    navigate('/');
-  }
-
-  useEffect(() => {}, [])
+    const newErrors = {};
+    if (formData.name.trim() === "") {
+      newErrors.name = true;
+    }
+    if (formData.contactNumber.trim() === "") {
+      newErrors.contact = true;
+    }
+    if (Object.keys(newErrors).length > 0) {
+      setInputError(newErrors);
+    } else {
+      e.preventDefault();
+      const newId = Math.floor(Math.random() * 100) + 1;
+      addContactHandler({ ...formData, id: newId });
+      setFormData({ name: "", contactNumber: "", email: "" });
+      navigate("/");
+    }
+  };
 
   return (
-    <div className="ui main">
-      <h2>Add Contact</h2>
-      <form className="ui form" onSubmit={saveDataHandler}>
-        <div className="field">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name "
-            value={formData.name}
-            onChange={changeHandler}
-          />
-        </div>
-        <div className="field">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={changeHandler}
-          />
-        </div>
-        <div className="field">
-          <label>Contact Number</label>
-          <input
-            type="text"
-            name="contactNumber"
-            placeholder="Contact Number"
-            value={formData.contactNumber}
-            onChange={changeHandler}
-          />
-        </div>
-        <button className="ui button blue">
-          Save
-        </button>
-      </form>
-    </div>
+    <Form onSubmit={saveDataHandler}>
+      <Form.Field required error={inputError.name}>
+        <label>Name</label>
+        <input
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={changeHandler}
+        />
+        {inputError.name && (
+          <Label basic color="red" pointing>
+            Please enter your name
+          </Label>
+        )}
+      </Form.Field>
+      <Form.Field required error={inputError.contact}>
+        <label>Contact</label>
+        <input
+          name="contactNumber"
+          placeholder="Contact Number"
+          value={formData.contactNumber}
+          onChange={changeHandler}
+        />
+        {inputError.name && (
+          <Label basic color="red" pointing>
+            Please enter contact number
+          </Label>
+        )}
+      </Form.Field>
+      <Form.Field>
+        <label>Email</label>
+        <input
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={changeHandler}
+        />
+      </Form.Field>
+      <div style={{display:"flex"}}>
+      <Button primary color="teal" type="submit">
+        Submit
+      </Button>
+      <Button onClick={() => navigate("/")}>Cancel</Button>
+      </div>
+    </Form>
   );
 };
 
