@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Input, Label } from "semantic-ui-react";
+import { Form, Button, Label } from "semantic-ui-react";
 
 const AddContact = ({ addContactHandler }) => {
   const [formData, setFormData] = useState({
@@ -19,10 +19,7 @@ const AddContact = ({ addContactHandler }) => {
   // Function to handle form input change
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    console.log("name and value: ", name, value);
-    console.log("FormData before change:",formData);
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-    console.log("FormData after change:",formData);
     setInputError({ ...inputError, [name]: false });
   };
 

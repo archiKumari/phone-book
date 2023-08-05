@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { Item, Button, Icon, Segment } from "semantic-ui-react";
 import { Card } from "semantic-ui-react";
 
 const ContactCard = ({ contact, clickHandler }) => {
