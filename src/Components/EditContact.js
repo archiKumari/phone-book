@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Label } from "semantic-ui-react";
 
-const AddContact = ({ addContactHandler }) => {
+const EditContact = ({ location, history }) => {
   const [formData, setFormData] = useState({
     name: "",
     contactNumber: "",
@@ -16,7 +16,10 @@ const AddContact = ({ addContactHandler }) => {
 
   const navigate = useNavigate();
 
-  // Function to handle form input change
+  useEffect(() => {
+    setFormData(location.state.contact);
+  }, [location.state.contact]);
+
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -35,8 +38,7 @@ const AddContact = ({ addContactHandler }) => {
       setInputError(newErrors);
     } else {
       e.preventDefault();
-      const newId = Math.floor(Math.random() * 100) + 1;
-      addContactHandler({ ...formData, id: newId });
+      history.push("/contacts");
       setFormData({ name: "", contactNumber: "", email: "" });
       navigate("/");
     }
@@ -91,4 +93,4 @@ const AddContact = ({ addContactHandler }) => {
   );
 };
 
-export default AddContact;
+export default EditContact;

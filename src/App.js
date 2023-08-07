@@ -2,10 +2,11 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./Components/Header"
+import Header from "./Components/Header";
 import AddContact from "./Components/AddContact";
 import ContactList from "./Components/ContactList";
 import ContactDetails from "./Components/ContactDetails";
+import EditContact from "./Components/EditContact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -52,7 +53,11 @@ function App() {
           />
           <Route
             path="/contact/:id"
-            element={<ContactDetails contacts={contacts}/>}
+            element={<ContactDetails contacts={contacts} />}
+          />
+          <Route
+            path="/contact/:id/edit"
+            element={<EditContact/>}
           />
         </Routes>
       </Router>
