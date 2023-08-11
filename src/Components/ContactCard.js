@@ -20,7 +20,8 @@ const ContactCard = ({ contact, clickHandler }) => {
   return (
     <Card>
       <Card.Content>
-        <Link to={{ pathname: `/contact/${id}`, state: { contact } }}>
+        {/* <Link to={{ pathname: `/contact/${id}`, state: { contact } }}> */}
+        <Link to={{ pathname: `/contact/${id}`}}>
           <div style={avatartStyle}>{name[0].toUpperCase()}</div>
           <Card.Header>{name}</Card.Header>
           <Card.Meta>{email}</Card.Meta>

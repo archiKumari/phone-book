@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Label } from "semantic-ui-react";
 
-const EditContact = ({ location, history }) => {
+const EditContact = ({contact}) => {
+  console.log("props: ",contact);
   const [formData, setFormData] = useState({
     name: "",
     contactNumber: "",
@@ -16,9 +17,9 @@ const EditContact = ({ location, history }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setFormData(location.state.contact);
-  }, [location.state.contact]);
+  // useEffect(() => {
+  //   setFormData(location.state.contact);
+  // }, [location.state.contact]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -38,7 +39,7 @@ const EditContact = ({ location, history }) => {
       setInputError(newErrors);
     } else {
       e.preventDefault();
-      history.push("/contacts");
+      // props.history.push("/contacts");
       setFormData({ name: "", contactNumber: "", email: "" });
       navigate("/");
     }
