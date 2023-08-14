@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Form, Button, Label } from "semantic-ui-react";
 
-const EditContact = ({contact}) => {
-  console.log("props: ",contact);
+const EditContact = () => {
+  const location = useLocation();
+  console.log("Location:",location.state.contact);
+  const contact = location.state.contact;
   const [formData, setFormData] = useState({
-    name: "",
-    contactNumber: "",
-    email: "",
-    id: 0,
+    name: contact.name,
+    contactNumber: contact.contactNumber,
+    email: contact.email,
+    id: contact.id,
   });
   const [inputError, setInputError] = useState({
     name: false,
@@ -16,10 +18,6 @@ const EditContact = ({contact}) => {
   });
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   setFormData(location.state.contact);
-  // }, [location.state.contact]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;

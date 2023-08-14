@@ -1,13 +1,21 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation ,Link, useNavigate } from "react-router-dom";
 import { Segment, Button, Icon } from "semantic-ui-react";
-const ContactDetails = ({ contacts }) => {
-  const { id } = useParams();
-  const contact = contacts.find((item) => item.id === parseInt(id, 10));
+
+
+const ContactDetails = () => {
+  
+  const location = useLocation();
+  console.log("Location:",location);
+  console.log("State",location.state);
+  const contact = location.state.contact;
   const { name, email, contactNumber } = contact;
-  if (!contact) {
-    return <div>Item not found!</div>;
+
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/contact/${contact.id}/edit`,{state:{contact}});
   }
+
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -68,7 +76,7 @@ const ContactDetails = ({ contacts }) => {
           zIndex: 999,
         }}
       >
-        <Button circular animated="fade" color="teal">
+        <Button circular animated="fade" color="teal" onClick={handleNavigate}>
           <div
             style={{
               height: "40px",
@@ -81,17 +89,10 @@ const ContactDetails = ({ contacts }) => {
               paddingTop: "5px",
             }}
           >
-            <Link
-              to={{
-                pathname: `/contact/${contact.id}/edit`,
-                state: { contact },
-              }}
-            >
               <Button.Content hidden>Edit</Button.Content>
               <Button.Content visible>
                 <Icon name="pencil" />
               </Button.Content>
-            </Link>
           </div>
         </Button>
       </div>
