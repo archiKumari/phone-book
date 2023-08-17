@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Label } from "semantic-ui-react";
+import {HOST} from '../Constant'
 
 const AddContact = ({ addContactHandler }) => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const AddContact = ({ addContactHandler }) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     setInputError({ ...inputError, [name]: false });
   };
-
+  
   const saveDataHandler = (e) => {
     const newErrors = {};
     if (formData.name.trim() === "") {
@@ -37,8 +38,29 @@ const AddContact = ({ addContactHandler }) => {
       e.preventDefault();
       const newId = Math.floor(Math.random() * 100) + 1;
       addContactHandler({ ...formData, id: newId });
+      newContactHandler({ ...formData, id: newId });
       setFormData({ name: "", contactNumber: "", email: "" });
       navigate("/");
+    }
+  };
+
+  const newContactHandler = async (contact) => {
+
+    try {
+      const response = await fetch(HOST + `api/contacts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contact),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 

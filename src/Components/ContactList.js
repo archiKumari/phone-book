@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Grid, Button, Icon } from "semantic-ui-react";
+import { Grid, Button, Icon } from "semantic-ui-react";
 
 import ContactCard from "./ContactCard";
+import { HOST } from "../Constant";
 
-const ContactList = ({ contacts, getContactId }) => {
+const ContactList = () => {
   const navigate = useNavigate();
 
-  const deleteContact = (id) => {
-    getContactId(id);
-  };
+  const [contacts, setContacts] = useState([]);
+
+  async function fetchContacts() {
+    try {
+      const response = await fetch(HOST + `api/contacts/`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        const fetchedData = await response.json();
+        console.log(fetchedData);
+        setContacts(fetchedData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
 
   return (
     <div>
       <Grid columns={3}>
         {contacts.map((contact) => (
           <Grid.Column key={contact.id}>
-            <ContactCard contact={contact} clickHandler={deleteContact} />
+            <ContactCard contact={contact} />
           </Grid.Column>
         ))}
       </Grid>
-      <div style={{margin:"20px"}}></div>
+      <div style={{ margin: "20px" }}></div>
       <Button
         icon
         color="teal"

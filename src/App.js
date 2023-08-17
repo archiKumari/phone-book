@@ -1,8 +1,7 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./Components/Header";
 import AddContact from "./Components/AddContact";
 import ContactList from "./Components/ContactList";
 import ContactDetails from "./Components/ContactDetails";
@@ -20,33 +19,16 @@ function App() {
     console.log("Contacts at Add contact: ", allContacts);
   };
 
-  const deleteContactHandler = (contactId) => {
-    const newContacts = contacts.filter((contact) => {
-      return contact.id !== contactId;
-    });
-    setContacts(newContacts);
-    localStorage.setItem(localStorageKey, JSON.stringify(newContacts));
-  };
-
-  useEffect(() => {
-    const savedContacts = localStorage.getItem(localStorageKey);
-    setContacts(savedContacts ? JSON.parse(savedContacts) : []);
-    console.log("getting contacts here!", savedContacts);
-  }, []);
+  // useEffect(() => {
+  //   const savedContacts = localStorage.getItem(localStorageKey);
+  //   setContacts(savedContacts ? JSON.parse(savedContacts) : []);
+  // }, []);
 
   return (
     <div className="ui container">
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ContactList
-                contacts={contacts}
-                getContactId={deleteContactHandler}
-              />
-            }
-          />
+          <Route path="/" element={<ContactList />} />
           <Route
             path="/add"
             element={<AddContact addContactHandler={addContactHandler} />}
@@ -55,10 +37,7 @@ function App() {
             path="/contact/:id"
             element={<ContactDetails contacts={contacts} />}
           />
-          <Route
-            path="/contact/:id/edit"
-            element={<EditContact/>}
-          />
+          <Route path="/contact/:id/edit" element={<EditContact />} />
         </Routes>
       </Router>
     </div>

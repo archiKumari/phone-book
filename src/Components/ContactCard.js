@@ -23,14 +23,12 @@ const ContactCard = ({ contact, clickHandler }) => {
   }
 
   return (
-    <Card>
+    <Card onClick={handleNavigate}>
       <Card.Content>
-        <Button onClick={handleNavigate}>
           <div style={avatartStyle}>{name[0].toUpperCase()}</div>
           <Card.Header>{name}</Card.Header>
           <Card.Meta>{email}</Card.Meta>
           <Card.Description>{contactNumber}</Card.Description>
-          </Button>
       </Card.Content>
     </Card>
   );
