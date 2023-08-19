@@ -8,14 +8,14 @@ import { HOST } from "../Constant";
 const ContactList = () => {
   const navigate = useNavigate();
 
-  const [contacts, setContacts] = useState([]);
+  const [contacts,setContacts] = useState([]);
 
   async function fetchContacts() {
     try {
       const response = await fetch(HOST + `api/contacts/`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
-      } else {
+      } else { 
         const fetchedData = await response.json();
         console.log(fetchedData);
         setContacts(fetchedData);
@@ -26,20 +26,19 @@ const ContactList = () => {
     }
   }
 
-  useEffect(() => {
-    fetchContacts();
-  }, []);
+  useEffect(() =>{fetchContacts();},[])
+
 
   return (
     <div>
       <Grid columns={3}>
         {contacts.map((contact) => (
           <Grid.Column key={contact.id}>
-            <ContactCard contact={contact} />
+            <ContactCard contact={contact}/>
           </Grid.Column>
         ))}
       </Grid>
-      <div style={{ margin: "20px" }}></div>
+      <div style={{ margin: "50px" }}></div>
       <Button
         icon
         color="teal"

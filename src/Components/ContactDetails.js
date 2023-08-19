@@ -1,21 +1,37 @@
-import React from "react";
-import { useParams, useLocation ,Link, useNavigate } from "react-router-dom";
+import React, { useEffect,useState } from "react";
+import {useNavigate, useParams } from "react-router-dom";
 import { Segment, Button, Icon } from "semantic-ui-react";
-
+import { HOST } from "../Constant";
 
 const ContactDetails = () => {
-  
-  const location = useLocation();
-  console.log("Location:",location);
-  console.log("State",location.state);
-  const contact = location.state.contact;
-  const { name, email, contactNumber } = contact;
+
+  const [contact,setContact] = useState({name:"ABCD",contactNumber:"12345",email:"abcd@gmail.com",id:"0"});
+
+  const { id } = useParams();
+  async function fetchContactDetails() {
+    try {
+      const response = await fetch(HOST + `api/contacts/${id}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        const fetchedData = await response.json();
+        console.log(fetchedData);
+        setContact(fetchedData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    fetchContactDetails();
+  },[]);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/contact/${contact.id}/edit`,{state:{contact}});
-  }
-
+    navigate(`/contact/${contact.id}/edit`, { state: { contact } });
+  };
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -50,20 +66,20 @@ const ContactDetails = () => {
                 marginRight: "25px",
               }}
             >
-              {name[0].toUpperCase()}
+              {contact.name[0].toUpperCase()}
             </div>
-            {name}
+            {contact.name}
           </div>
         </Segment>
         <Segment.Group>
           <Segment.Group horizontal>
             <Segment>Email ID</Segment>
-            <Segment>{email}</Segment>
+            <Segment>{contact.email}</Segment>
             <Segment></Segment>
           </Segment.Group>
           <Segment.Group horizontal>
             <Segment>Contact Number</Segment>
-            <Segment>{contactNumber}</Segment>
+            <Segment>{contact.contactNumber}</Segment>
             <Segment></Segment>
           </Segment.Group>
         </Segment.Group>
@@ -89,10 +105,10 @@ const ContactDetails = () => {
               paddingTop: "5px",
             }}
           >
-              <Button.Content hidden>Edit</Button.Content>
-              <Button.Content visible>
-                <Icon name="pencil" />
-              </Button.Content>
+            <Button.Content hidden>Edit</Button.Content>
+            <Button.Content visible>
+              <Icon name="pencil" />
+            </Button.Content>
           </div>
         </Button>
       </div>

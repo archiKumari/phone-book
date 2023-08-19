@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Label } from "semantic-ui-react";
 import {HOST} from '../Constant'
 
-const AddContact = ({ addContactHandler }) => {
+const AddContact = () => {
   const [formData, setFormData] = useState({
     name: "",
     contactNumber: "",
@@ -17,7 +17,6 @@ const AddContact = ({ addContactHandler }) => {
 
   const navigate = useNavigate();
 
-  // Function to handle form input change
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -37,7 +36,6 @@ const AddContact = ({ addContactHandler }) => {
     } else {
       e.preventDefault();
       const newId = Math.floor(Math.random() * 100) + 1;
-      addContactHandler({ ...formData, id: newId });
       newContactHandler({ ...formData, id: newId });
       setFormData({ name: "", contactNumber: "", email: "" });
       navigate("/");
@@ -45,7 +43,6 @@ const AddContact = ({ addContactHandler }) => {
   };
 
   const newContactHandler = async (contact) => {
-
     try {
       const response = await fetch(HOST + `api/contacts/`, {
         method: 'POST',
