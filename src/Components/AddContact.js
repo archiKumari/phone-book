@@ -8,7 +8,6 @@ const AddContact = () => {
     name: "",
     contactNumber: "",
     email: "",
-    id: 0,
   });
   const [inputError, setInputError] = useState({
     name: false,
@@ -35,8 +34,7 @@ const AddContact = () => {
       setInputError(newErrors);
     } else {
       e.preventDefault();
-      const newId = Math.floor(Math.random() * 100) + 1;
-      newContactHandler({ ...formData, id: newId });
+      newContactHandler({ ...formData });
       setFormData({ name: "", contactNumber: "", email: "" });
       navigate("/");
     }
