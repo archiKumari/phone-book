@@ -1,0 +1,40 @@
+.card-container {
+    border: 2px solid rgba(128,128,128,0.8);
+    padding: 20px;
+}
+
+.top-segment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.bottom-segment {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: rgb(245, 245, 245);
+    background-color: rgba(0, 128, 129, 0.6);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.top-segment-text {
+    font-size: 25px;
+    color: black;
+    text-transform: uppercase;
+    margin: 60px;
+}
+
+.bottom-segment-text {
+    font-size: 22px;
+    color: black;
+}

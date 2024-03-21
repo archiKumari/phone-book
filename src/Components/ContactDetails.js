@@ -26,7 +26,7 @@ const ContactDetails = () => {
 
   useEffect(() => {
     fetchContactDetails();
-  },[]);
+  },[contact]);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
