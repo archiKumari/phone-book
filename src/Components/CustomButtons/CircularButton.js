@@ -1,20 +1,21 @@
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 
-function CustomButton({ buttonText, buttonClick, icon }) {
+function CircularButton({ buttonText, buttonClick, icon }) {
   const buttonStyle = {
-    height: "40px",
-    width: "40px",
+    height: "30px",
+    width: "30px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     fontSize: "18px",
     paddingLeft: "8px",
     paddingTop: "5px",
+    marginLeft:"5px",
   }
 
   return (
-    <Button circular animated="fade" color="teal" onClick={buttonClick}>
+    <Button circular floated="right" color="teal" animated="fade" onClick={buttonClick}>
       <div style={buttonStyle}>
         <Button.Content hidden>{buttonText}</Button.Content>
         <Button.Content visible>
@@ -25,4 +26,4 @@ function CustomButton({ buttonText, buttonClick, icon }) {
   );
 }
 
-export default CustomButton;
+export default CircularButton;

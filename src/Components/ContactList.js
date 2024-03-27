@@ -4,7 +4,7 @@ import { Grid } from "semantic-ui-react";
 
 import ContactCard from "./ContactCard/ContactCard";
 import Modal from "./Modal/Modal";
-import CustomButton from "./Button";
+import CircularButton from "./CustomButtons/CircularButton";
 import { HOST } from "../Constant";
 
 const ContactList = () => {
@@ -85,8 +85,14 @@ const ContactList = () => {
 
   return (
     <div style={{ padding: "30px" }}>
-      <p style={{ fontSize: "45px", fontWeight: "bold", color: "teal" }}>
-        Contacts List
+      <p
+        style={{
+          fontSize: "45px",
+          fontWeight: "bold",
+          color: "rgba(0, 128, 129, 0.7)",
+        }}
+      >
+        All Contacts
       </p>
       <Grid columns={3}>
         {contacts.map((contact) => (
@@ -95,48 +101,22 @@ const ContactList = () => {
           </Grid.Column>
         ))}
       </Grid>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <CustomButton
-          buttonClick={() => {
-            navigate("/add");
-          }}
-          buttonText="Add"
-          icon="add"
-        />
-        {/* <Button
-          circular
-          animated="fade"
-          color="teal"
-          onClick={() => {
-            navigate("/add");
-          }}
-        >
-          <div
-            style={{
-              height: "40px",
-              width: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: "18px",
-              paddingLeft: "8px",
-              paddingTop: "5px",
-            }}
-          >
-            <Button.Content hidden>Add</Button.Content>
-            <Button.Content visible>
-              <Icon name="add" />
-            </Button.Content>
-          </div>
-        </Button> */}
-        <Modal
-          isOpen={modalOpen}
-          onClose={handleCloseModal}
-          contact={selectedContact}
-          onEdit={handleEditContact}
-          onDelete={handleDeleteContact}
-        />
-      </div>
+
+      <CircularButton
+        buttonClick={() => {
+          navigate("/add");
+        }}
+        buttonText="Add"
+        icon="add"
+      />
+
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+        contact={selectedContact}
+        onEdit={handleEditContact}
+        onDelete={handleDeleteContact}
+      />
     </div>
   );
 };

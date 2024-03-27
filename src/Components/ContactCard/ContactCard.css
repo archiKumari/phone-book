@@ -1,6 +1,6 @@
 .card-container {
-    border: 2px solid rgba(128,128,128,0.8);
-    padding: 20px;
+    border: 2px solid rgba(0, 128, 129, 0.6);
+    padding: 15px;
 }
 
 .top-segment {
@@ -24,17 +24,16 @@
     background-color: rgba(0, 128, 129, 0.6);
     height: 80px;
     width: 80px;
-    border-radius: 50%;
 }
 
 .top-segment-text {
-    font-size: 25px;
+    font-size: 22px;
     color: black;
     text-transform: uppercase;
-    margin: 60px;
+    margin: 20px;
 }
 
 .bottom-segment-text {
-    font-size: 22px;
+    font-size: 20px;
     color: black;
 }

@@ -14,7 +14,7 @@ const ContactCard = ({ contact, onCardClick}) => {
       <div className="top-segment">
         <div className="avatar">{name[0].toUpperCase()}</div> {/*image */}
         <div>
-        <p className="top-segment-text">{name}</p> {/*name */}
+          <p className="top-segment-text">{name}</p> {/*name */}
         </div>
       </div>
       <div className="bottom-segment">

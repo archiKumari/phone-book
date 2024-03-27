@@ -1,27 +1,46 @@
-import React from 'react';
-import './Modal.css'
-import CustomButton from '../Button'
+import React from "react";
+import "./Modal.css";
+import { ButtonGroup } from "semantic-ui-react";
+import IconButton from "../CustomButtons/IconButton";
 
 function Modal({ isOpen, onClose, contact, onEdit, onDelete }) {
   return (
     isOpen && (
       <div className="modal">
+        <span className="close-button" onClick={onClose}>
+          &times;
+        </span>
         <div className="modal-content">
-          <span className="close" onClick={onClose}>&times;</span>
-          {contact && (
+          <img className="avatar-style" src={contact.image_source} />
+
+          <div className="text-container">
             <div>
-              <p><strong>Name:</strong> {contact.name}</p>
-              <p><strong>Phone:</strong> {contact.phone}</p>
-              <p><strong>Email:</strong> {contact.email}</p>
+              <p className="heading">Name</p>
+              <p className="subtext">{contact.name}</p>
+              <p className="heading">Contact</p>
+              <p className="subtext">{contact.contact}</p>
+              <p className="heading">Email</p>
+              <p className="subtext">{contact.email}</p>
             </div>
-          )}
-          <div>
-            <CustomButton buttonClick={onEdit} buttonText="Edit" icon="pencil" />
-            <CustomButton buttonClick={onDelete} buttonText="Delete" icon="trash alternate" />
-            <CustomButton buttonClick={onClose} buttonText="Close" icon="close"/>
-            {/* <button onClick={onEdit}>Edit</button>
-            <button onClick={onDelete}>Delete</button>
-            <button onClick={onClose}>Close</button> */}
+            <ButtonGroup floated="right">
+              <IconButton
+                iconName="pencil"
+                buttonText="Edit"
+                onButtonClick={onEdit}
+              />
+
+              <IconButton
+                iconName="heart"
+                buttonText="Favorite"
+                onButtonClick={onClose}
+              />
+
+              <IconButton
+                iconName="trash alternate"
+                buttonText="Delete"
+                onButtonClick={onDelete}
+              />
+            </ButtonGroup>
           </div>
         </div>
       </div>
