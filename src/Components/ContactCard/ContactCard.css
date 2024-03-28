@@ -1,39 +1,35 @@
 .card-container {
-    border: 2px solid rgba(0, 128, 129, 0.6);
-    padding: 15px;
+  background-color: rgba(0, 128, 129, 0.8);
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
 }
 
 .top-segment {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .bottom-segment {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  color: black;
 }
 
 .avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    color: rgb(245, 245, 245);
-    background-color: rgba(0, 128, 129, 0.6);
-    height: 80px;
-    width: 80px;
+  border: 2px solid rgba(245, 222, 179, 0.8);
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
 }
 
 .top-segment-text {
-    font-size: 22px;
-    color: black;
-    text-transform: uppercase;
-    margin: 20px;
+  font-size: 22px;
+  color: black;
+  text-transform: uppercase;
+  margin: 20px;
 }
 
-.bottom-segment-text {
-    font-size: 20px;
-    color: black;
-}

@@ -12,14 +12,14 @@ const ContactCard = ({ contact, onCardClick}) => {
   return (
     <div className="card-container" onClick={handleClick}>
       <div className="top-segment">
-        <div className="avatar">{name[0].toUpperCase()}</div> {/*image */}
+        <img className="avatar" src={contact.image_source} />
         <div>
-          <p className="top-segment-text">{name}</p> {/*name */}
+          <p className="top-segment-text">{name}</p> 
         </div>
       </div>
       <div className="bottom-segment">
-        <p className="bottom-segment-text">{phone}</p> {/*phone */}
-        <p className="bottom-segment-text">{email}</p> {/*email */}
+        <p>{phone}</p> 
+        <p style={{marginTop:"-10px"}}>{email}</p> 
       </div>
     </div>
   );
